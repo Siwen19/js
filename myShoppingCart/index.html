@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>结算清单</title>
+		<link rel="stylesheet" href="结算清单.css"/>
+		<script src="结算清单.js"></script> 
+	</head>
+	<body>
+		<table id="cartTable">
+			<thead>
+				<tr>
+					<th><label><input id="selectAll" class="check-all check" type="checkbox"/>&nbsp;全选</label></th>
+					<th>商品</th>
+					<th>单价</th>
+					<th>数量</th>
+					<th>小计</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td class="checkbox"><input id="item" class="check-one" type="checkbox" onclick="getStart()"/></td>
+					<td class="goods"><img src="images/phone1.jpg" alt="" /><span>苹果</span></td>
+					<td class="price">5999</td>
+					<td class="count">
+						<span class="reduce">-</span>
+						<input class="count-input" type="text" value="1" />
+						<span class="add">+</span></td>
+					<td class="subtotal">5999</td>
+					<td class="operation"><span class="delete">删除</span></td>
+				</tr>
+				<tr>
+					<td class="checkbox"><input id="item" class="check-one" type="checkbox" onclick="getStart()"/></td>
+					<td class="goods"><img src="images/phone2.jpg" alt="" /><span>荣耀</span></td>
+					<td class="price">1899</td>
+					<td class="count"><span class="reduce">-</span><input class="count-input" type="text" value="1" /><span class="add">+</span></td>
+					<td class="subtotal">1899</td>
+					<td class="operation"><span class="delete">删除</span></td>
+				</tr>
+				<tr>
+					<td class="checkbox"><input id="item" class="check-one" type="checkbox" onclick="getStart()"/></td>
+					<td class="goods"><img src="images/phone3.jpg" alt="" /><span>小米</span></td>
+					<td class="price">1499</td>
+					<td class="count"><span class="reduce">-</span><input class="count-input" type="text" value="1" /><span class="add">+</span></td>
+					<td class="subtotal">1499</td>
+					<td class="operation"><span class="delete">删除</span></td>
+				</tr>
+
+			</tbody>
+		</table>
+
+		<div class="foot" id="foot">
+			<div class="fr closing" onclick="showTotal()">结 算</div>
+			<div class="fr total">合计：￥<span id="priceTotal">0.00</span></div>
+			<div class="fr selected">已选商品
+				<span id="selectedTotal">0</span>件
+
+			</div>
+		</div>
+	</body>
+</html>
