@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小熊跑进度条</title>
+    <style>
+        * {
+            margin: 0; 
+            padding: 0;}
+        .view { 
+            position: absolute;
+            background-color: #ffebeb;
+            width: 100%;
+            height: 100%;
+        }
+        html {
+            font-size: 37.5px;
+        }
+        .bear {
+            width: 6.5em;
+            height: 1.89em;
+            /* 达到 水平居中 */
+            margin-left: auto;
+            margin-right: auto; 
+            position: relative; 
+        }
+        .bear-img {
+            /* bear 盒子太大了 可以放多个熊 创建这个盒子 */
+            background-image: url('http://s1.map.bdimg.com/zt/y2015/waimaibear/mobile/images/rider1_1b78925.png');
+            width: 2.4em;
+            height: 1.89em; 
+            /* 背景图片大小 适应width，height */
+            background-size: 100% 100%; 
+            position: absolute;
+            right: 0;
+            /* float: right;  */
+            animation: bear-run 1s linear forwards;
+        }
+        .progress {
+            width: 6.25em;
+            height: 0.245em;
+            border: 2px solid #000;
+            border-radius: .5rem;
+            margin-left: auto;
+            margin-right: auto;
+            overflow: hidden;  
+        }
+        .progress-img {
+            background: red; 
+            height: 100%;
+            float: right;
+            /* animation: progress 1s linear forwards; */
+        }
+        /* @keyframes progress {
+            from {
+                width: 0%;
+            }
+            to {
+                width: 100%;
+            }
+        } */
+        @keyframes bear-run {
+            0% {
+                transform: translate3d(0, 0, 0);
+            }
+            8% {
+                transform: translate3d(0, -.125rem, 0);
+            }
+            16% {
+                transform: translate3d(0, 0, 0);
+            }
+            26% {
+                transform: translate3d(-.4rem, -.125rem, 0);
+            }
+            34% {
+                transform: translate3d(-.8rem, 0, 0);
+            }
+            42% {
+                transform: translate3d(-1.2rem, -.125rem, 0);
+            }
+            50% {
+                transform: translate3d(-1.6rem, 0, 0);
+            }
+            60% {
+                transform: translate3d(-2.4rem, -.125rem, 0);
+            }
+            68% {
+                transform: translate3d(-2.8rem, 0, 0);
+            }
+            76% {
+                transform: translate3d(-3.2rem, -.125rem, 0);
+            }
+            84% {
+                transform: translate3d(-3.6rem, 0, 0);
+            }
+            92% {
+                transform: translate3d(-4.0rem, -.125rem, 0);
+            }
+            100% {
+                transform: translate3d(-4.1rem, 0, 0);
+            } 
+        }
+    </style>
+</head>
+<body>
+    <div class="view">
+        <div class="bear">
+            <div class="bear-img"></div>
+        </div>
+        <div class="progress">
+            <div class="progress-img"></div>
+        </div>
+    </div>
+    <script>
+        const progress = document.querySelector('.progress-img');
+        let width = 0; 
+        // var interval = setInterval(function() {
+        //     width = width + 10;
+        //     if (width > 100) {
+        //         clearInterval(interval);
+        //         return;
+        //     }
+        //     progress.style.width = width + '%';
+        // },100)
+        setInterval(function timer() {
+            width = width + 10;
+            if (width > 100) {
+                // clearInterval(interval); // 无效
+                return; // 有效
+            }
+            progress.style.width = width + '%';
+        },100)
+    </script>
+</body>
+</html>
