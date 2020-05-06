@@ -7,7 +7,7 @@
     <title>百度map</title>
     <script type="text/javascript"
         src="https://api.map.baidu.com/api?v=2.0&ak=W5qCRlU27vNksB2uFRFZQlihuLdGsDrk"></script>
-    <style>  
+    <style>
         body,
         html {
             width: 100%;
@@ -28,9 +28,8 @@
         .suggestion {
             position: absolute;
             top: 0;
-            right: 10vw;
-            width: 20vw;
-            height: 10vh;
+            width: 300px;
+            height: 50px;
             background: white;
             margin: 2px;
             padding: 10px;
@@ -40,35 +39,36 @@
 
         #starting,
         #destination {
-            width: 12vw;
-            height: 3vh;
-        }
-
-        .end {
-            position: absolute;
-            top: 50px;
+            width: 150px;
+            height: 15px;
         }
 
         .search {
-            width: 4vw;
-            height: 4vh;
+            width: 50px;
+            height: 22px;
+            margin-top: 2px;
         }
 
-        .r-result{width:100%;}
+        .r-result {
+            width: 100%;
+        }
     </style>
 </head>
 
-<body> 
-        <div id="map"></div>
-        <div class="suggestion">
-            <div class="start">起始点:
-                <input type="text" id="starting">
-            </div>
-            <div class="end">终点:
-                <input type="text" id="destination">
-                <button class="search">搜索</button>
-            </div>
-        </div> 
+<body>
+    <div id="map"></div>
+    <div class="suggestion">
+        <div class="start">起始点:
+            <input type="text" id="starting">
+        </div>
+        <div id="searchResultPanel" style="border:1px solid #C0C0C0;width:150px;height:auto; display:none;"></div>
+        <div class="end">终点:
+            <input type="text" id="destination">
+            <div id="searchResultPanel2" style="border:1px solid #C0C0C0;width:150px;height:auto; display:none;"></div>
+
+            <button class="search">搜索</button>
+        </div>
+    </div>
     <div id="r-result"></div>
     <script>
         // html, css, js 都加载完了 
@@ -82,13 +82,81 @@
         var endPos = document.querySelector('#destination');
         var route = document.querySelector('#r-result');
         map.centerAndZoom('南昌', 14);
+        // 百度地图API功能 
+        function G(id) {
+            return document.getElementById(id);
+        }
+        var ac = new BMap.Autocomplete(    //建立一个自动完成的对象
+            {
+                "input": "starting",
+                "location": map,
+            });
+
+        var bc = new BMap.Autocomplete(    //建立一个自动完成的对象
+            {
+                "input": "destination",
+                "location": map,
+            });
+
+        let eve = ac || bc;
+
+        eve.addEventListener("onhighlight", function (e) {  //鼠标放在下拉列表上的事件
+            var str = "";
+            var _value = e.fromitem.value;
+            var value = "";
+            let text = '';
+            if (eve == ac) {
+                text = 'searchResultPanel';
+            } else {
+                text = 'searchResultPanel2';
+            }
+            if (e.fromitem.index > -1) {
+                value = _value.province + _value.city + _value.district + _value.street + _value.business;
+            }
+            str = "FromItem<br />index = " + e.fromitem.index + "<br />value = " + value;
+
+            value = "";
+            if (e.toitem.index > -1) {
+                _value = e.toitem.value;
+                value = _value.province + _value.city + _value.district + _value.street + _value.business;
+            }
+            str += "<br />ToItem<br />index = " + e.toitem.index + "<br />value = " + value;
+            G(text).innerHTML = str;
+        });
+
+        var myValue;
+        eve.addEventListener("onconfirm", function (e) {    //鼠标点击下拉列表后的事件
+            var _value = e.item.value;
+            let text = '';
+            if (eve == ac) {
+                text = 'searchResultPanel';
+            } else {
+                text = 'searchResultPanel2';
+            }
+            myValue = _value.province + _value.city + _value.district + _value.street + _value.business;
+            G(text).innerHTML = "onconfirm<br />index = " + e.item.index + "<br />myValue = " + myValue;
+
+            setPlace();
+        });
+
+        function setPlace() {
+            map.clearOverlays();    //清除地图上所有覆盖物
+            function myFun() {
+                var pp = local.getResults().getPoi(0).point;    //获取第一个智能搜索的结果
+                map.centerAndZoom(pp, 18);
+                map.addOverlay(new BMap.Marker(pp));    //添加标注
+            }
+            var local = new BMap.LocalSearch(map, { //智能搜索
+                onSearchComplete: myFun
+            });
+            local.search(myValue);
+        }
+
         search.addEventListener('click', function () {
             route.classList.add('#r-result');
             var walking = new BMap.WalkingRoute(map, { renderOptions: { map: map, panel: "r-result", autoViewport: true } });
             walking.search(`${originPos.value}`, `${endPos.value}`);
-        })
-
-
+        }) 
     </script>
 </body>
 
