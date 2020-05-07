@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>红绿灯跳动</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            width: 100px;
+            height: 100px;
+            background-color: #666;
+            border-radius: 50%;
+            margin: 20px auto;
+            list-style: none;
+        }
+
+        ul.stop li:nth-child(1) {
+            background-color: red;
+        }
+
+        ul.warn li:nth-child(2) {
+            background-color: yellow;
+        }
+
+        ul.pass li:nth-child(3) {
+            background-color: green;
+        }
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <script>
+        const ul = document.querySelector('ul');
+        // setTimeout(() => {
+        //     ul.className = 'stop';
+        //     setTimeout(() => {
+        //         ul.className = 'warn';
+        //         setTimeout(() => {
+        //             ul.className = 'pass';
+        //         }, 1000);
+        //     }, 1000);
+        // }, 1000); 
+
+        // promise then 串行结构 回调 嵌套结构
+        // let p = new Promise(function(resolve, reject) {
+        //     setTimeout(() => {
+        //         resolve(); // 成功 fulfilled  失败 rejected  处理中 pending
+        //     }, 1000);
+        // });
+        let p = function () {
+            return new Promise(function (resolve, reject) {
+                setTimeout(() => {
+                    resolve();
+                }, 1000);
+            })
+        }
+        light();
+        function light() {
+            p().then(function () {
+                ul.className = 'stop';
+                return p();
+            })// 成功之后
+                .then(function () {
+                    ul.className = 'warn';
+                    return p();
+                })
+                .then(function () {
+                    ul.className = 'pass';
+                    return p();
+                })
+            p().catch(); // 失败之后 
+        }
+        setInterval(() => {
+            light();
+        }, 3000); 
+    </script>
+</body>
+
+</html>
