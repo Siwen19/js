@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>360前端特效面试</title>
+    <style>
+        /* 1. 伪元素
+            2. 定位
+            3. 变量 改变
+             */
+        :root {
+            --size: 0px;
+            --x: 0px;
+            --y: 0px;
+        }
+        .button {
+            background-color: #f72359;
+            padding: 1em 2em;
+            border: none;
+            color: white;
+            font-size: 1.2em;
+            cursor: pointer;
+            outline: none;
+            overflow: hidden;
+            border-radius: 100px;
+            position: relative;
+        }
+        .button::before {  
+            content: '';
+            position: absolute;
+            left: var(--x);
+            top: var(--y);
+            height: var(--size);
+            width: var(--size);
+            /* background-color: green; */
+            background: radial-gradient(circle closest-side, #4405f7, transparent);
+            transform: translate3d(-50%, -50%, 0);
+            transition: width .2s ease, height .2s ease;
+        }
+        .button:hover::before {
+            --size: 400px;
+        }
+    </style>
+</head>
+<body>
+    <button class="button">按钮</button>
+    <script>
+        document
+        .querySelector('.button')
+        .addEventListener('mousemove', (e) => {
+            // console.log(e.pageX, e.pageY);
+            const x = e.pageX - e.target.offsetLeft;
+            const y = e.pageY - e.target.offsetTop;
+            e.target.style.setProperty('--x', `${x}px`) ;
+            e.target.style.setProperty('--y', `${y}px`);
+        })
+    </script>
+</body>
+</html>
