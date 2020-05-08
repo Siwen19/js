@@ -1,0 +1,47 @@
+<script>
+    // 浏览器自动编码  安全性 有那么一些特殊字符 后端sql 语句威胁
+    // 传输每个设备 编码规则 
+    function encode(str) {
+        return encodeURIComponent(str).
+            replace('%5B', '[').replace('%5D', ']');
+    }
+    function build(url, params) {
+        let parts = [];
+        Object.keys(params).forEach((key) => {
+            let value = params[key];
+            if (value === null || typeof value === 'undefined') {
+                return;
+            }
+            // 传递数组 处理不合法值
+            if (Array.isArray(value)) {
+                key += '[]';
+                // c: [1, 2, 3] => c[]=1&c[]=2&c[]=3
+            } else {
+                value = [value];
+            }
+            value.forEach(val => {
+                let part = `${encode(key)}=${encode(val)}`;
+                // &
+                parts.push(part);
+                console.log(part);
+            })
+        })
+        url += '?' + parts.join('&');
+        const hasIndex = url.indexOf('#');
+        if (hasIndex !== -1) {
+            // 从 0 到 # 位置 截取下来
+            url = url.slice(0, hasIndex);
+        }
+        return url;
+    }
+    // url #后面的内容是不会传输给后端的 会被丢掉
+    let url = build('http://neteasecloudmusicapi.zhaoboy.com/search#header', {
+        keywords: '海阔天空',
+        // type: 'all',
+        // query: 'js'
+        a: null,
+        b: undefined,
+        c: [1, 2, 3]
+    })
+    console.log(url);
+</script>
