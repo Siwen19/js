@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D-box</title>
+    <style>
+        body {
+            width: 100%;
+            height: 100%;  
+            background-color: #333;
+        }
+        .wrap {
+            width: 500px;
+            height: 500px; 
+            margin: 10px auto;
+            padding: 0 40px;
+        }
+        .col {
+            position: relative;
+            display: inline-block;
+            width: 200px;
+            flex-grow: 1; 
+            perspective: 1200px;
+            height: 500px;
+        } 
+        .box {
+            position: absolute;
+            z-index: 10; 
+            top: 100px;
+            left: 50px;
+            text-align: center; 
+            transition: all .3s;
+            transform-style: preserve-3d;
+            transform: translateY(100px) rotateY(-36deg) rotateX(-15deg) rotateZ(10deg);
+        }
+        .box, .box .side {
+            width: 120px;
+            display: inline-block;
+            box-sizing: border-box;
+            height: 120px;
+        } 
+        .box .side {
+            position: absolute;
+            z-index: 38;
+            border: 1px solid #3f515f; 
+            background-color: #0390A1;
+            transition: all .25s;
+            transform-style: preserve-3d; 
+        }
+        .box, .box .side {
+            width: 120px;
+            box-sizing: border-box;
+            height: 120px;
+            display: inline-block;
+        }
+        .box .top {
+            position: absolute;
+            top: -120px;
+            left: 0px;
+            box-sizing: border-box;
+            background-color: transparent;
+            transform: rotateX(90deg);
+            transform-origin: bottom;
+        }
+        .box .front {
+            left: 0;
+            height: 110px;
+            color: #fff;
+            font-size: 67px;
+            line-height: 120px; 
+            transform-origin: right top; 
+            font-size: 28px;
+        }
+        .box .top .lid-left {
+            position: absolute;
+            left: 0; 
+            box-sizing: border-box;
+            width: 50%;
+            height: 180px; 
+            background-color: #0390A1;
+            transition: all .25s;
+            transform-origin: left; 
+            transform: rotateY(-120deg);
+        }  
+        .box .left {
+            right: 100%;
+            height: 110px;
+            border: 2px solid #3f515f;
+            transform: rotateY(-90deg);
+            transform-origin: right;
+        }
+        .box .right {
+            left: 100%;
+            padding: 12px 0 0 12px;
+            height: 110px;
+            text-align: left;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+            font-size: 20px;
+            line-height: 1.2;
+            transform: rotateY(90deg);
+            transform-origin: left top;
+            font-family:'Roboto Slab','Helvetica Neue',Helvetica,'Hiragino Sans GB',Arial,sans-serif;
+        }
+        .box .top .lid-right {
+            position: absolute;
+            right: 0;
+            border: 2px solid #3f515f;
+            transform:  rotateY(126deg);
+            transform-origin: right;
+        } 
+        .box .top .lid-left, .box .top .lid-right{
+            display: inline-block;
+            box-sizing: border-box;
+            width: 50%;
+            height: 120px;
+            background-color: #0390A1;
+        } 
+        .box .back {
+            position: absolute;
+            left: 0;
+            height: 110px;
+            transform: translateZ(-120px);
+        }  
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div class="col">
+            <div class="container">
+                <div class="box">
+                    <div class="side left"> </div>
+                    <div class="side top">
+                        <div class="lid-left"></div>
+                        <div class="lid-right"></div>
+                    </div>
+                    <div class="side front">
+                        : )
+                    </div>
+                    <div class="side right">
+                        "GET"
+                        <br>
+                        "UDID"
+                    </div>
+                    <div class="side back"></div>
+                </div>
+            </div> 
+        </div> 
+            </div>
+           
+</body>
+</html>
