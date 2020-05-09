@@ -25,17 +25,24 @@
                 parts.push(part);
                 console.log(part);
             })
-        })
-        url += '?' + parts.join('&');
+        }) 
         const hasIndex = url.indexOf('#');
         if (hasIndex !== -1) {
             // 从 0 到 # 位置 截取下来
             url = url.slice(0, hasIndex);
         }
+        // url中出现？
+        let hasQ = url.indexOf('?');
+        console.log(hasQ)
+        if (hasQ == -1) {
+            url += '?' + parts.join('&');
+        } else {
+            url += '&' + parts.join('&');
+        }
         return url;
     }
     // url #后面的内容是不会传输给后端的 会被丢掉
-    let url = build('http://neteasecloudmusicapi.zhaoboy.com/search#header', {
+    let url = build('http://neteasecloudmusicapi.zhaoboy.com/search?header', {
         keywords: '海阔天空',
         // type: 'all',
         // query: 'js'
