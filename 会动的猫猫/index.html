@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cat</title>
+    <style> 
+        .body {
+            position: absolute;     
+            background-image: url('./cat/maoshenti.png');
+            width: 117px;
+            height: 201px; 
+            top: 50%;
+            left: 50%;
+            margin-left: -50px;
+            margin-top: -100px;  
+            /* left: 50%;
+            top: 50%;
+            transform: translate3d(-50%, -50%, 0); */
+            /* 在页面水平居中 */ 
+        } 
+        .weiba {
+            position: absolute;  
+            z-index: -1; 
+            width: 64px;
+            height: 194px; 
+            background-image: url('./cat/maowei.png');  
+            top: -182px;
+            animation: ani 1s ease-in-out infinite alternate;
+            transform-origin: 100% 100%;     
+        }
+        .maozhua {
+            position: absolute;  
+            z-index: -1;
+            width: 34px;
+            height: 81px;
+            top: 184px;
+            left: 69px;
+            background-image: url('./cat/maozhua.png');  
+            animation: hand 1s ease-in-out infinite alternate;
+            transform-origin: 0% 0%;
+        }
+        .maoyan1 {
+            position: absolute;
+            top: 166px;
+            left: 76px;
+            background-image: url('./cat/maoyan1.png');
+            width: 3px;
+            height: 3px;
+        }
+        .maoyan2 {
+            position: absolute;
+            top: 178px;
+            left: 90px;
+            background-image: url('./cat/maoyan2.png');
+            width: 3px;
+            height: 3px;
+        }
+        .maozui {
+            position: absolute;
+            top: 178px;
+            left: 80px;
+            background-image: url('./cat/maozui.png');
+            width: 3px;
+            height: 3px;
+        }
+
+        @keyframes ani {
+            100% {
+                transform: rotate(-5deg);
+            }
+        }
+
+
+        @keyframes hand {
+            100% {
+                transform: rotate(5deg);
+            }
+        } 
+    </style>
+</head>
+
+<body>  
+    <!-- html 结构 body, maozhua 平级 -->
+    <!-- body: z-index maozhu: z-index -->
+    <!-- 如果不平级（嵌套）body: z-index: 99 maozhua: z-index 2 -->
+    <!-- 99 -->
+        <div class="body"> 
+        <div class="weiba"></div>
+        <!-- 2 -->
+        <div class="maozhua"></div>   
+        <div class="maoyan1"></div>
+        <div class="maoyan2"></div>
+        <div class="maozui"></div>
+    </div> 
+</body> 
+</html>
