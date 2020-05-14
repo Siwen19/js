@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>
+        <button type="button" onclick="clickCounter()">点我！</button>
+        <div id="result"></div>
+    </p>
+    <script>
+        let count = 0;
+        let result = document.getElementById('result');
+        // function clickCounter() {
+        //     count++;
+        //     result.innerText = count;
+        // }
+        function clickCounter() {
+            if (typeof Storage !== 'undefined') {
+                // 浏览器支持本地Storage吗? 浏览器嗅探
+                if (sessionStorage.clickCounter) {
+                    sessionStorage.clickCounter = Number(sessionStorage.clickCounter) + 1;
+                } else {
+                    sessionStorage.clickCounter = 1;
+                }
+                result.innerText = `你在按钮上已经点击了${sessionStorage.clickCounter}次。`
+            } else { 
+                result.innerText = 'Sorry, 浏览器不支持。'
+            }
+        }
+    </script>
+</body>
+</html>
