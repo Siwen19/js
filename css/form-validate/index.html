@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- action/class 属性attribute -->
+    <form action="http://www.baidu.com" class="form" name="myform" autocomplete="off">
+        <div>
+            <label for="userName">用户名</label>
+            <input type="text" placeholder="输入用户名" id="userName">
+        </div>
+
+        <div>
+            <label for="pwd">密码</label>
+            <input type="text" placeholder="输入密码" id="pwd">
+        </div>
+
+        <div>
+            <label for="repwd">确认密码</label>
+            <input type="text" placeholder="再次输入密码" id="repwd">
+        </div>
+
+        <div>
+            <label for="sex">性别</label>
+            <!-- 都是 sex 的选项 -->
+            <input type="radio" value="man" name="sex" id="man" checked>
+            <label for="man">男</label>
+            <input type="radio" value="woman" name="sex" id="woman">
+            <label for="woman">女</label>
+        </div>
+
+        <div>
+            <label for="hobby">爱好</label>
+            <select name="hobby" id="hobby">
+                <option value="dog">dog</option>
+                <option value="cat">cat</option>
+                <option value="rabbit" selected>rabbit</option>
+            </select>
+        </div>
+
+        <div>
+            <button type="submit">提交</button>
+        </div>
+    </form>
+    </div>
+
+    <script>
+        const form = document.forms.myform;
+        // console.log(form);
+        // const hobby = form.hobby.value;
+        form.addEventListener('submit', function (event) {
+            // console.log('提交了');
+            event.preventDefault();
+            const userName = form.userName.value;
+            const repwd = form.repwd.value;
+            const pwd = form.pwd.value;
+            const sex = form.sex.value;
+            const hobby = form.hobby.value;
+            // trim()去掉空格
+            if (userName.trim().length === 0) {
+                alert('userName cannot be none');
+                return;
+            }
+            if (repwd.trim() !== pwd) {
+                alert('确认密码和密码不一致');
+                return;
+            }
+            const div = document.createElement('div');
+            div.innerHTML = `
+                <span>用户名: ${userName}</span>
+                <span>密码: ${pwd}</span>
+                <span>sex: ${sex}</span>
+                <span>hobby: ${hobby}</span>
+            `;
+            document.body.appendChild(div);
+        })
+    </script>
+</body>
+
+</html>
