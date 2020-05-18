@@ -1,0 +1,16 @@
+{
+  "name": "blog",
+  "version": "1.0.0",
+  "description": "怎样向我们的应用提供数据？\r - 爬取 cherrio\r - MVC Model(Mysql)-View(React)-Controller(Node)\r - \r     可以实现增删改查，但不像启用MySQL这么繁琐",
+  "main": "index.js",
+  "scripts": {
+    "json-server": "./node_modules/.bin/json-server --watch db.json --port 3300",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "json-server": "^0.16.1"
+  }
+}
