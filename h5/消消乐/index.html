@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>xiaoxiaole</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .mycanvas {
+            margin: 20px 30%;   
+        }
+    </style>
+</head>
+
+<body>
+    <canvas class="mycanvas" id="mycanvas" width="300px" height="300px">
+        <script>
+            let mycanvas = document.getElementById('mycanvas');
+            let context = mycanvas.getContext('2d');
+            let sixColor = [];
+            let list = [];
+            let obj = {};
+            // let map = new Map();  
+            function init() {
+                for (let k = 0; k < 6; k++) {
+                    let randomColor = `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, 0.8)`;
+                    while (sixColor.indexOf(randomColor) !== -1) {
+                        randomColor = `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, 0.8)`;
+                    }
+                    sixColor.push(randomColor);
+                }
+                for (let a = 0; a < 10; a++) {
+                    list[a] = []
+                    for (let b = 0; b < 10; b++) {
+                        list[a][b] = Math.floor(Math.random() * 6);
+                    }
+                }
+                drawCell();
+                drawBall();
+            }
+            function drawCell() {
+                for (let i = 1; i < 10; i++) {
+                    context.beginPath();
+                    context.moveTo(30 * i, 0);
+                    context.lineTo(30 * i, 300);
+                    context.lineWidth = 1;
+                    context.strokeStyle = '#fff';
+                    context.stroke();
+                }
+                for (let j = 1; j < 10; j++) {
+                    context.moveTo(0, 30 * j);
+                    context.lineTo(300, 30 * j);
+                    context.stroke();
+                    context.closePath();
+                }
+            }
+            function drawBall() {
+                // console.log(sixColor)
+                for (let m = 0; m < 10; m++) {
+                    for (let n = 0; n < 10; n++) {
+                        changeBallColor(m, n, list[m][n]);
+                        sixColor.splice(list[m][n], 0);
+                    }
+                }
+            }
+            function changeBall(event) {
+                // console.log(event.offsetX)
+                let x = Math.floor(event.offsetX / 30);
+                let y = Math.floor(event.offsetY / 30);  
+                let isClose; 
+                // console.log(Object.keys(obj).length)
+                if (Object.keys(obj).length !== 0) {
+                    isClose = ((x + y) === (obj.a + obj.b - 1)) || ((x + y) === (obj.a + obj.b + 1)) ? true : false;
+                }
+                if (Object.keys(obj).length === 0) {
+                    // 1
+                    // map.set('a', x);
+                    // map.set('b', y);
+                    // map.set('stack', list[x][y]);
+                    // 2 
+                    obj = {
+                        a: x,
+                        b: y,
+                        stack: list[x][y]
+                    }   
+                    setStroke(x, y, 'black'); 
+                } else if (isClose) {
+                    // 1
+                    // list[map.get('a')][map.get('b')] = list[x][y];
+                    // changeBallColor(map.get('a'), map.get('b'), list[x][y]);
+                    // list[x][y] = map.get('stack');
+                    // changeBallColor(x, y, map.get('stack')); 
+                    // 2
+                    list[obj.a][obj.b] = list[x][y];
+                    changeBallColor(obj.a, obj.b, list[x][y]);
+                    setStroke(obj.a, obj.b, 'rgba(255, 255, 255, 1');
+                    let temp = list[x][y]; 
+                    list[x][y] = obj.stack;
+                    changeBallColor(x, y, obj.stack);  
+                    setStroke(x, y, 'black'); 
+                    obj = {
+                        a: x,
+                        b: y,
+                        stack: list[x][y]
+                    };
+                }
+            }
+            function changeBallColor(x, y, num) {
+                context.beginPath();
+                context.arc(x * 30 + 15, y * 30 + 15, 10, 0, 2 * Math.PI, true);
+                context.fillStyle = `${sixColor[num]}`;
+                context.fill();
+                context.closePath();
+            }
+            function setStroke(x, y, isBlack) {
+                context.beginPath();
+                context.arc(x * 30 + 15, y * 30 + 15, 12, 0, 2 * Math.PI, true); 
+                context.strokeStyle = `${isBlack}`;
+                context.stroke();
+                context.closePath();
+            }
+            mycanvas.addEventListener('click', changeBall)
+            init();  
+        </script>
+</body>
+
+</html>
