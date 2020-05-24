@@ -1,0 +1,25 @@
+<script>
+    var obj = {
+        count: 0,
+        cool: function() { 
+            console.log(this)  
+                setTimeout( () => { 
+                    console.log(this)
+                    this.count++;
+                    console.log("awesome?"); 
+                }, 100); 
+        }
+    }
+
+    // var obj = {
+    //     age: 1,
+    //     say: function() {
+    //         console.log(this)
+    //         setTimeout(function() {
+    //             console.log(this, this.age); // window undefined
+    //         }, 0);
+    //     },
+    // }
+
+    obj.cool();
+</script>

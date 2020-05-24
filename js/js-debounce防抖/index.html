@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="search">
+    <script src="https://cdn.bootcdn.net/ajax/libs/lodash.js/4.17.15/lodash.min.js"></script>
+    <script>
+        const search = document.querySelector('#search');
+        let timeOut;
+        function handleDebounce(event) {  
+            if (timeOut) {
+                clearTimeout(timeOut);
+            } 
+            timeOut = setTimeout(() => {   
+                console.log(event.target.value);
+            }, 600);
+        }  
+        search.addEventListener('input', _.debounce((event) => console.log(event.target.value), 600));
+    </script>
+</body>
+</html>

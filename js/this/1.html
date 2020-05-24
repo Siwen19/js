@@ -1,0 +1,68 @@
+<!-- <button id="btn">btn</button> -->
+<!-- <script>
+    // const btn = document.getElementById('btn')
+
+    // function onClick() {
+    //     console.log(this)
+    // }
+
+    // btn.addEventListener('click', () => {
+    //     onClick.call(obj)
+    // })
+    var obj = {
+        a: 'obj a'
+    }
+    var a = 'global variable';
+    function foo(b, c) {
+        // this === window
+        // this.a === window.a
+        console.log(this)
+        console.log(this.a + b, c)
+    }
+    // window 前端 一个全局变量 只要打开一个浏览器窗口，就有一个全局变量
+    // 我们平常用的全局变量 都在 window 下面
+    // 运行的时候 this
+    // 1. 不加任何修饰， 用（）调用，默认 this 指向window
+    // foo('b'); 
+    // 2. call 也是调用这个函数的, call 第一个参数 可以指定函数调用时 需要的 this
+    // 往后的参数 就是我们 foo 调用时需要的形参
+    // apply 要用数组包起来
+    foo.apply(obj, ['b var', 'c variable']);
+    // foo.call(obj, '-b', 'c variable')
+</script> -->
+<script>
+    var obj1 = {
+        a: 1, 
+        say: function() {
+            console.log(this)
+            console.log(this.a)
+        }
+    }
+
+    var obj2 = {
+        a: 2,
+        say1: function() {
+            // console.log(this);
+            // obj1.say();
+            obj1.say.call(this);
+        }
+    } 
+
+    let person1 = {
+    name:'lisi',
+    age:10,
+    say:function(){
+        console.log(this)
+        //这里是外部作用域 ，this指向person1,即箭头函数中的this指向person1
+        setTimeout(() => {
+            console.log(this);  //this指向外部作用域中this
+        });
+    }
+}
+person1.say();  //输出person1对象
+    // obj1.say.call(obj2);
+    // obj1.say();
+    // let test = obj1.say;
+    // test(); 
+    // obj2.say1();
+</script> 
