@@ -1,0 +1,11 @@
+{
+  "name": "member",
+  "version": "1.0.0",
+  "description": "css + html + js\r     stylus\r     typescript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
