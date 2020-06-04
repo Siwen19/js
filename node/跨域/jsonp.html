@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        // 1 callback
+        // 2 后端 callbackName(数据)
+        function fff(posts) {
+            console.log(posts);
+            // 渲染
+        }
+  // 前端没有调用，
+    </script>
+    <!-- 后端返回结果 -->
+    <!-- 
+请求完毕之后 得到
+=》 字符串：onResponse(["js","php"])  
+=》 因为 script 标签的原因，浏览器会把这一段字符串当做 JS 执行
+=》当做 js 我们 前端预先定义好的 回调就会执行，拿到数据
+-->
+    <script src="http://localhost:9090/api?callback=fff"></script>
+    <!-- <script>
+  onResponse(["js","php"])
+</script> -->
+    <script>
+        // 别人
+        $.ajax('http://localhost:9090/api', {
+            dataType: 'jsonp',
+            success: (data) => {
+                console.log(data);
+            }
+        })
+    </script>
+
+    https://c.y.qq.com/v8/fcg-bin/album_library?g_tk=1278911659&hostUin=0&format=jsonp&jsonpCallback=callback&inCharset=utf8&outCharset=utf-8&notice=0&platform=yqq&needNewCode=0&cmd=firstpage&page=0&pagesize=20&sort=1&language=-1&genre=0&year=1&pay=0&type=-1&company=-1
+    http://localhost:9090/api?callback=jQuery351011803992292070098_1590218857591&_=1590218857592
+    <script>
+        function jsonp(url, options) {
+            const { timeout } = options;
+            return new Promise((resolve, reject) => {
+                // 为了防止方法名冲突
+                let funcName = `jsonp${Date.now()}`;
+                let t = null, scriptNode;
+                // callback
+                window[funcName] = function (data) {
+                    if (t) clearTimeout(t);
+                    console.log('------', data);
+                    resolve(data);
+                    // 全局 setInterval 全局事件绑定
+                    delete window[funcName];  //  
+                    document.body.removeChild(scriptNode);   // 
+                }
+                scriptNode = document.createElement('script');
+                scriptNode.src = `${url}?callback=${funcName}`;
+                // 发出请求
+                // console.log(scriptNode)
+                document.body.appendChild(scriptNode);
+                t = setTimeout(() => {
+                    reject('network err, timeout')
+                }, timeout)
+                // 失败了
+                scriptNode.onerror = function (err) {
+                    reject(err);
+                }
+            })
+        }
+        // promise: 
+        // pending resolve
+        // pending reject
+        jsonp('http://localhost:9090/api', {
+            callBack: 'res1',
+            timeout: 3000
+        }).then(res => {
+            console.log('jsonp->', res);
+        })
+            .catch(err => {
+                console.log(err);
+            })
+    </script>
+</body>
+
+</html>
