@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/时光簿/jquery.mobile-1.4.5/jquery.mobile.icons-1.4.5.min.css">
+    <script src="https://apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="/时光簿/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
+        .header {
+            border: none;
+            width: 100%;
+            height: 60px;
+            display: flex;
+            flex-direction: row;
+            position: relative;
+            background: linear-gradient(45deg, #fcec61, #fda8f9, rgb(170, 255, 241)) no-repeat;  
+        }
+
+        .header span {
+            position: absolute;
+            font-size: 18px;
+            font-family: monospace;
+            top: 30%;  
+            right: 40%;
+        }  
+
+        .nav {
+            width: 100%;
+            height: 200px; 
+            position: relative; 
+        }
+
+        .nav img {
+            position: absolute;
+            margin-top: 10px;
+            margin-left: 15px; 
+            border-radius: 10px;
+            width: 90%;
+            height: 90%;
+        } 
+
+        .nav img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px 2px rgba(13, 24, 28, .3);
+        }
+
+        .main {
+            position: relative;
+            width: 100%;
+            height: 600px;  
+            overflow: scroll;
+        } 
+        /* 中间第一行 */
+        .main #ui-grid-a {
+            position: absolute;
+            width: 100%;
+            height: 30%;  
+        } 
+        /* 中间第二行 */
+        .main #ui-grid-b {
+            position: absolute;
+            width: 100%;
+            height: 30%; 
+            top: 35%;
+        }  
+        /* 中间第三行 */
+        .main #ui-grid-c {
+            position: absolute;
+            width: 100%;
+            height: 30%; 
+            top: 70%;
+        }   
+        /* 中间第四行 */
+        .main #ui-grid-d {
+            position: absolute;
+            width: 100%;
+            height: 30%; 
+            top: 105%;
+            margin-bottom: 10px;
+        }   
+
+        .main .ui-block-a {
+            position: relative;
+            width: 40%;
+            height: 100%; 
+            left: 5%;
+            background-color: #fff;   
+            box-shadow: 0 0 10px rgba(13, 24, 28, .2);
+        }
+        /* a阴影 */
+        .main .ui-block-a:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px 2px rgba(13, 24, 28, .3);
+        }
+
+        .main .ui-block-b {
+            position: absolute;
+            width: 40%;
+            height: 100%; 
+            right: 5%;
+            background-color: #fff;   
+            box-shadow: 0 0 10px rgba(13, 24, 28, .2);
+        }
+        /* b阴影 */
+        .main .ui-block-b:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px 2px rgba(13, 24, 28, .3);
+        }
+
+         .main .ui-block-a img {
+             width: 100%;
+             height: 120px;
+             position: absolute;
+             left: 0;
+             top: 0; 
+         }
+
+         .main .ui-block-b img { 
+            width: 100%;
+             height: 120px;
+             position: absolute;
+             left: 0;
+             top: 0; 
+         }
+
+         .main .ui-block-a span, .main .ui-block-b .title {  
+             width: 108px;
+             height: 17px;
+             font-size: 13px;
+             font-weight: bold;
+             position: absolute;
+             bottom: 35px;
+             left: 10px; 
+             overflow: hidden;
+             text-overflow: ellipsis;
+             white-space: nowrap;
+         }
+         /* a价格 */
+         .main .ui-block-a .price { 
+            font-size: 12px;
+             font-weight: lighter;
+             color: red;
+             position: absolute; 
+             text-align: left;
+             left: 5px;
+             bottom: 9px;
+         }
+
+         .main .ui-block-a .orgnprice { 
+            position: absolute;  
+            font-weight: lighter;
+             color: rgb(153, 153, 153); 
+             left: 40px; 
+             bottom: -2px; 
+             font-size: 12px;
+         } 
+
+         .main .ui-block-a .line {  
+            position: absolute;
+             color: rgb(153, 153, 153); 
+            left: 45px;
+            bottom: 10px; 
+            font-size: 12px;
+            font-weight: lighter;
+         }
+
+         .main .ui-block-a .people {
+            position: absolute;
+             width: 70px;
+             height: 17px;
+             font-size: 12px;
+             font-weight: lighter;
+             color: #000; 
+             left: 75px;
+             bottom: 8px;
+         }
+
+         /* b价格 */
+         .main .ui-block-b .price { 
+             font-size: 12px;
+             font-weight: lighter;
+             color: red;
+             position: absolute; 
+             text-align: left;
+             left: 5px;
+             bottom: 10px;
+         }
+
+         .main .ui-block-b .orgnprice { 
+             position: absolute;  
+             color: rgb(153, 153, 153); 
+             left: 40px; 
+             bottom: 0; 
+             font-size: 12px;
+         } 
+
+         .main .ui-block-b .line {   
+             position: absolute;
+             color: rgb(153, 153, 153); 
+            left: 48px;
+            bottom: 10px; 
+            font-size: 12px;
+            font-weight: lighter;
+         }
+
+         .main .ui-block-b .people {
+             position: absolute;
+             width: 70px;
+             height: 17px;
+             font-size: 12px;
+             font-weight: lighter;
+             color: #000; 
+             right: -2px;
+             bottom: 8px;
+         }
+
+         .footer {
+            width: 100%;
+            position: relative;
+            display: block;
+            bottom: 0;
+            height: 1%;
+        }
+
+        .ui-block-a,
+        .ui-block-b,
+        .ui-block-c,
+        .ui-block-d {
+            height: 1%;
+            font-weight: bold;
+            text-align: center; 
+            position: relative;
+        }
+
+        .ui-block-b {
+            border-top-right-radius: 50px;
+        }
+
+        .ui-block-c {
+            border-top-left-radius: 50px;
+        }
+
+        .ui-block-a .label,
+        .ui-block-b .label,
+        .ui-block-c .label,
+        .ui-block-d .label {
+            position: absolute;
+            top: 75%;
+            left: 27px;
+            font-size: 14px;
+            text-decoration: none;
+        }
+
+        .footer .more {
+            border: 1px solid #000;
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            bottom: 45px;
+            left: 42%;
+            border-radius: 50%;
+            border: none;
+            background: linear-gradient(160deg, #fffc55, #fc85f6) no-repeat;
+        }
+
+        .footer .more img {
+            width: 30px;
+            height: 30px;
+            position: absolute;
+            bottom: 10px;
+            left: 20%;
+        }
+    </style>
+</head>
+
+<body>
+    <div data-role="page"  style="background-color: rgb(230, 230, 230);">
+        <div data-role="header" class="header" style="border: none; background-color: white; ">
+            <span>时光有品</span>  
+        </div>
+
+        <div class="nav">
+            <img src="/时光簿/时光簿图片/市集/header.jpg" />    
+        </div>
+
+        <div data-role="main" class="main">
+            <div class="ui-grid-a" id="ui-grid-a">
+                <div class="ui-block-a">
+                    <a href="#"><img src="/时光簿/时光簿图片/市集/intros/intro1.jpg" /></a>
+                    <span class="title"></span>
+                    <p class="price">￥9.9     <span class="orgnprice">￥13.9<p class="line">——</span></p>
+                    <span class="people">85人付款</span>
+                </div>
+
+                <div class="ui-block-b">
+                    <a href="#"><img src="/时光簿/时光簿图片/市集/intros/intro2.jpg"/></a>
+                    <div class="ui-grid-b">  
+                    <span class="title"></span>
+                    <p class="price">￥2.9     <span class="orgnprice">￥3.9<p class="line">——</span></p>
+                    <span class="people">303人付款</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ui-grid-a" id="ui-grid-b">
+                <div class="ui-block-a">
+                    <a href="#"><img src="/时光簿/时光簿图片/市集/intros/intro3.jpg" /></a><br>
+                    <span class="title"></span>
+                    <p class="price">￥3.9     <span class="orgnprice">￥4.9 <p class="line">——</span></p>
+                    <span class="people">54人付款</span>
+                </div>
+
+                <div class="ui-block-b">
+                    <a href="#"><img src="/时光簿/时光簿图片/市集/intros/intro4.jpg" /></a><br>
+                    <span class="title"></span>
+                    <p class="price">￥13.9     <span class="orgnprice">￥15.9<p class="line">——</span></p>
+                    <span class="people">48人付款</span>
+                </div>
+            </div>
+
+            <div class="ui-grid-a" id="ui-grid-c">
+                <div class="ui-block-a">
+                    <a href="#"><img src="/时光簿/时光簿图片/市集/intros/intro5.jpg" /></a><br>
+                    <span class="title"></span>
+                    <p class="price">￥9.9     <span class="orgnprice">￥13.9<p class="line">——</span></p>
+                    <span class="people">72人付款</span>
+                </div>
+
+                <div class="ui-block-b">
+                    <a href="#"><img src="/时光簿/时光簿图片/市集/intros/intro6.jpg" /></a><br>
+                    <span class="title"></span>
+                    <p class="price">￥11.9     <span class="orgnprice">￥15.9<p class="line">——</span></p>
+                    <span class="people">29人付款</span>
+                    </div> 
+            </div>
+
+            <div class="ui-grid-a" id="ui-grid-d">
+                <div class="ui-block-a">
+                    <a href="#"><img src="/时光簿/时光簿图片/市集/intros/intro7.jpg" /></a><br>
+                    <span class="title"></span>
+                    <p class="price">￥24.9     <span class="orgnprice">￥26.9<p class="line">——</span></p>
+                    <span class="people">12人付款</span>
+                </div>
+
+                <div class="ui-block-b">
+                    <a href="#"><img src="/时光簿/时光簿图片/市集/intros/intro8.jpg" /></a><br>
+                    <span class="title"></span>
+                    <p class="price">￥4.8     <span class="orgnprice">￥5.8<p class="line">——</span></p>
+                    <span class="people">45人付款</span>
+                    </div>  
+            </div> 
+        </div>
+
+            <div data-role="footer" class="footer">
+                <div class="ui-grid-c" style="height: 70px;">
+                    <div class="ui-block-a">
+                        <a href="#" class="ui-btn ui-icon-home ui-btn-icon-left" style="width: 30px;height: 30px;"></a>
+                        <a class="label" rel="external" href="HomePage.html"  style="color: rgb(170, 170, 170);">首页</a>
+                    </div>
+                    <div class="ui-block-b" id="shop">
+                        <a href="#" class="ui-btn ui-icon-shop ui-btn-icon-left" style="width: 30px;height: 30px;"></a>
+                        <a class="label" style="color: black;">购物</a>
+                    </div>
+                    <div class="ui-block-c" id="message">
+                        <a href="#" class="ui-btn ui-icon-comment ui-btn-icon-left" style="width: 30px;height: 30px;"></a>
+                        <a class="label" style="color: rgb(170, 170, 170);">消息</a>
+                    </div>
+                    <div class="ui-block-d">
+                        <a href="#" class="ui-btn ui-icon-user ui-btn-icon-left" style="width: 30px;height: 30px;"></a>
+                        <a class="label" style="color: rgb(170, 170, 170);">我的</a>
+                    </div>
+                </div>
+                <div class="more">
+                    <img src="./时光簿图片/更多/纯.png" alt=更多>
+                </div>
+            </div>
+        </div> 
+    </div>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.min.js"></script>
+    <script> 
+    let toMessange = document.querySelector('#message');
+    toMessange.addEventListener('click', () => {
+        window.location.href = './message.html';
+    })  
+    let titles = document.querySelectorAll('.title');
+    axios({
+        withCredentials: true,
+        headers: {'X-Requested-With': 'XMLHttpRequest'},
+        url:'http://localhost:9090/',
+        method:'POST',
+        data:{
+            username:'123',
+            pwd:789
+        }
+    })
+    .then(res => {
+        titles.forEach((ele, index) => { 
+            ele.innerHTML = res.data.titles[index].name;
+        })
+        console.log(res.data.titles[0]);
+    })
+    </script>
+</body>
+
+</html>
