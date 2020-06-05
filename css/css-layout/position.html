@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .inner {
+            position: absolute;
+            left: 0;
+            top: 0;
+            background-color: red;
+        }
+        /* inner包含块就是in 
+            inner 相对于 in 定位
+        */
+        .in {
+            /* 父级 */
+            transform: translate3d(0, 0, 0);
+        }
+        .out {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <div class="out">
+        1
+        <div class="in">
+            2
+            <div class="inner">
+                3
+            </div>
+        </div>
+    </div>
+</body>
+</html>
