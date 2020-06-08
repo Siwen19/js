@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style> 
+        .wrap {
+            border: 1px solid #000;
+            /* 清除浮动 */
+            overflow: hidden; 
+            /* float: left; */
+            /* float影响外面的布局，有悖于"隔离容器" */
+            /* position: absolute; */
+            /* width: 100vw;
+            height: 100vh; */
+        }
+        .main {
+            width: 40px;
+            height: 200px;
+            background-color: green;
+            float: left; /* 脱离文档流 原来属于main的那块区间，main不占据了*/
+        }
+        .aside {
+            /*  */
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div class="main">main</div>
+        <div class="aside">aside<br>
+            aside<br>
+            aside<br>
+            aside<br>
+            aside<br>
+            aside<br>
+            aside<br>
+            aside<br>
+            aside<br>
+            aside<br>
+            aside<br>
+            aside<br>
+            aside<br>
+            aside<br>
+            aside<br>
+            aside<br>
+        </div>
+    </div>
+</body>
+</html>
