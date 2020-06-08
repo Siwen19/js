@@ -1,0 +1,15 @@
+{
+  "name": "jest-test-buildUrl",
+  "version": "1.0.0",
+  "description": "开发流程\r ## 单元测试 unit test\r 对每个最小单元",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^26.0.1"
+  }
+}
