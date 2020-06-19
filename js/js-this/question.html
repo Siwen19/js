@@ -1,0 +1,55 @@
+<script>
+  this.a = 20;  // 30
+  function go() {
+    // new 原理
+    // 创建一个对象 {}.__proto__ = go.prototype
+    console.log(this.a);
+    // this 上面的 a
+    this.a = 30;
+  }
+  go.prototype.a = 40;
+  var test = {
+    a: 50,
+    init: function (fn) {
+      // this
+      // fn 是一个普通的函数
+      // 在哪里以什么样的方式调用调用
+      // go()
+      fn();
+      console.log(this.a);
+      return fn;
+    }
+  };
+  console.log((new go()).a);  // 40  30
+  test.init(go);  // this === test // 20 50
+
+
+  class Home {
+    fn () {
+      console.log(this)
+    }
+    render() {
+      // this 
+      return (
+        // fn 传给 react
+        // this 指向哪里，看在哪里调用
+        // 调用 react 帮我们调用的
+         <div onClick={this.fn}></div>
+      );
+    }
+  }
+  function bar() {
+    console.log(this);
+  }
+  function foo() {
+    console.log(this)   // this === obj
+    //  foo 内部 this 不会影响 bar 内部的 this
+    // bar 在哪以什么样的方式调用
+    bar();
+  }
+  let obj = {
+    foo
+  }
+  obj.foo();
+  // 只影响 foo 内部 this
+</script>

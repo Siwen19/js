@@ -1,0 +1,12 @@
+<script>
+  function isMatch(reg, str) {
+    return str.match(reg);
+  }
+  console.log(isMatch(/[0-9]/, 'abc',))
+  console.log(isMatch(/[0-9]/, '1234',))
+  console.log(isMatch(/[0-9]/, 'abc123',))
+
+  let isContainerNumber = isMatch.bind(null, /[0-9]/);
+  console.log(isContainerNumber('123'))
+  console.log(isContainerNumber('ioioi'))
+</script>

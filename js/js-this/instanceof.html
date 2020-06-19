@@ -1,0 +1,54 @@
+<script>
+  // 实例   实际的例子
+
+  // 抽象类
+  // 动物 人类 车 组件 。。。
+  function Animal(live, eat) {
+    this.live = live;
+    this.eat = eat;
+  }
+  let cat = new Animal('land', 'meat');
+  Animal.prototype = {
+    a: 1,
+    b: 2
+  }
+  console.log(cat instanceof Animal);
+  let arr = [];
+  console.log(arr instanceof Array);
+  let p = new Promise(() => { })
+  console.log(p instanceof Promise)
+  // instanceof 原理：
+  // obj instanceof Constuctor
+  // 就是判断 左边这个对象(obj) 它的原型链上面 有没有出现过 Constuctor.prototype 这个对象
+  // 查找左边这个对象的原型链，看原型链有没有出现过 Constuctor.prototype这个对象 ，如果出现了 返回 true
+  // 如果找到原型链的顶端还没找到 返回false
+
+  function instance_of(obj, Constuctor) {
+    let prototype = Constuctor.prototype;
+    let proto = Object.getPrototypeOf(obj);
+    while (true) {
+      if (proto === null) {
+        return false;
+      } else if (proto === prototype) {
+        return true;
+      }
+      // 取到下一个原型
+      proto = Object.getPrototypeOf(proto);
+    }
+  }
+  // 两个 原理：new instanceof
+  console.log(instance_of(cat, Animal));
+  console.log(instance_of(Function, Object));
+  console.log(instance_of(Object, Function));
+  console.log(instance_of(Function, Function));
+
+  // js 创建一个对象的方式：
+  let obj = {}
+  let dog = new Animal();
+  // new 
+  // 1 创建一个 {}
+  // 2. {}.__proto__ = Animal.prototype
+  // 3. 返回这个 {}
+  let obj1 = new Object();
+  let obj2 = Object.create({});
+</script>
