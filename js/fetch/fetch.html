@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <style>
+            *{
+                margin: 0;
+                padding: 0;
+            }
+            body{
+                display: flex;
+                justify-content: center;
+            } 
+            input[type='text']{
+                border: 10px solid #f7f7f7;
+                padding: 10px;
+                outline: none; 
+                /* 把表单的外边框去除 */
+                border-radius: 4px;
+                text-align: center;
+                font-size: 18px;
+                box-shadow: 0 0 5px 1px rgba(0, 0, 0, .1), 
+                0 0 5px 1px rgba(0, 0, 0, .1) inset;
+                /* 用逗号隔开设置外阴影和内阴影, 内阴影一定要inset */
+            }
+            ul{
+                list-style: none; 
+            }
+            li{
+                padding: 10px; 
+                border: 1px solid #d8d8d8; 
+            }
+            li:nth-child(odd){
+                transform: perspective(100px) rotateX(-3deg);
+            }
+            /* perspective 3d */
+            li:nth-child(even){
+                transform: perspective(100px) rotateX(3deg);
+            }
+            li:last-child{
+                color: red;
+            }
+            .highLight{
+                background-color: yellow;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="search-form">
+            <input type="text" id="suggest"/>
+            <ul>
+                <li>filter by a city</li>
+                <li>or a state</li>
+            </ul>
+        </div>
+        <script>
+            let cities=[];
+            // 前端后端通过url关联 url:统一资源（图片、字体、html、js、video、image)定位符
+            // 发出请求需要时间
+            fetch('https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2...25e2c6f6/cities.json')
+            .then(function(res){
+                // 拿到数据了，想要数组，转为数组
+                // 转换也需要时间
+                return res.json();
+            })
+            .then(function(data){
+                console.log(data);
+                cities=data;
+            })
+            cities.forEach(function(a, b){})
+
+            const suggest=document.getElementById('suggest')
+            function findMatch(e){
+                let v=e.target.value; 
+                if(!v)return;
+                let suggestCity=cities.filter(function(city){
+                    if(city.city.includes(v) || city.state.includes(v)){
+                        return true;
+                    }else{
+                        return false;
+                    }
+                    // console.log(suggestCity);
+                    const ul=document.querySelector('ul')
+                    ul.innerHTML=suggestCity.map(function(city) {
+                        let cityName=city.city;
+                        let stateName=city.state;
+                        // 高亮 css
+                        cityName=cityName.replace(v, `<span class="highLight">${v}</span>`)
+                        stateName=stateName.replace(v, `<span class="highLight">${v}</span>`)
+                        return `
+                        <li>${cityName}-${stateName}</li>
+                    `
+                    })
+                    .join('')
+                })
+            }
+            suggest.addEventListener('keyup', findMatch);
+        </script>
+    </body>
+</html>

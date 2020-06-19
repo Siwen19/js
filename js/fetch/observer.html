@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container{
+            overflow: scroll;
+        }
+        /* 子元素 要在这个 200px 600px范围之外 */
+        .target{
+            margin-top: 900px;
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="target"></div>
+    </div>
+    <script>
+        // target 是在 container 之内滚动的， container是root
+        //属性
+        const target=document.querySelector(".target");
+        let observer = new IntersectionObserver(function(nodes){
+            nodes.forEach(function(node){
+                if(node.isIntersecting){
+                    console.log('已经出现了');
+                }
+            })
+        }, {
+            rootMargin: '0px 0px 100px 0px ',
+            // threshold: [0.5, 1]
+        }); 
+        
+        // 开始观察
+        // 如果出现在视窗范围之内，它就会通知我
+        observer.observe(target);
+    </script>
+</body>
+</html>
