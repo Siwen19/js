@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.min.js"></script>
+    <script>
+        // axios 第三方库 基于XMLhttprequest 库
+        // fetch 浏览器原生的另外一个发请求的 api
+        axios ({
+            method: 'get',
+            url: 'http://neteasecloudmusicapi.zhaoboy.com/search',
+            params: {
+                keywords: '海阔天空'
+            }
+        })
+        .then(function(res) { 
+            console.log(res);
+        })
+    </script>
+</body>
+</html>
