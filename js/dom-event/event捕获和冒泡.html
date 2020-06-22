@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./event.css">
+</head>
+<body>
+    <button id="btn">按钮</button>
+    <div class="parent">
+        parent
+        <div class="child">
+            child
+        </div>
+    </div>
+    <a href="./dom.html">跳转</a>
+    <script>
+        const parent = document.querySelector('.parent');
+        const child = document.querySelector('.child');
+        parent.addEventListener('click', ()=>{
+            console.log('parent 被点击了');
+        })
+        child.addEventListener('click', ()=>{
+            // child 触发 click 的时候 就是目标阶段
+            console.log('child 被点击了')
+            // 阻止冒泡
+            // event.stopPropagation();
+        })
+        // IE: 冒泡
+        // Firefox: 捕获 capture
+        // w3c 统一的规范, capture, bubble 融合 
+        window.addEventListener('click', ()=>{
+            console.log('window 被点击了')
+        }, {
+            capture: true,
+            // 点击一次 有用的
+            once: true
+        })
+        // // 阻止默认事件， html 标签有一些特殊功能 比如 a 点击后就会跳转页面
+        document.querySelector('a').addEventListener('click', function(event) {
+            event.preventDefault();
+        })
+        document.addEventListener('click', ()=>{
+            console.log('document 被点击了')
+        }, true) 
+
+        // const btn = document.getElementById('btn');
+        // // dom 0
+        // btn.onclick = function() {
+        //     console.log(0);
+        // }
+        // btn.onclick = function(){
+        //     console.log(1);
+        //     // 后面的点击会覆盖前面的
+        // }
+        // dom 1 没有事件相关修改
+        // dom 2
+        btn.addEventListener('click', ()=>{
+            console.log(22);
+        })
+
+        // dom3:添加了 鼠标、键盘（按下）
+        btn.addEventListener('click', ()=>{
+            console.log(11);
+        })
+
+    </script>
+</body>
+</html>

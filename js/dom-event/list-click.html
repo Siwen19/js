@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li>111<div>sssss</div><div>yyyyy</div></li>
+        <li>222</li>
+        <li>34343</li>
+    </ul>
+    <script>
+        // 点击每一个 li 输出 li 里面的文本内容
+        //  常规套路
+        // 只能选中 当前页面已有的 li 节点, 给他们绑定事件， 后面添加的 节点 是没有效果的
+        const lis = document.querySelectorAll('li');  
+        // // 每个 li 都绑定事件
+        // lis.forEach(li => {
+        //     li.addEventListener('click', function() {
+        //         console.log(li.innerText);
+        //     })
+        // })  
+
+        setTimeout(() => {
+            // 插入
+            const ul = document.querySelector('ul')
+            // 创建一个 li 节点
+            const li = document.createElement('li')
+            li.innerHTML = '44444'
+            console.log(li)
+            ul.append(li)
+        }, 3000);
+
+        // // 2
+        // const ul = document.querySelector('ul')
+        //     // 父节点 也可以监听到 子节点有没有发生点击事件（如果子节点点击了，父节点也会收到这个click事件）
+        // ul.addEventListener('click', function(event) {
+        //     // event.target 指的 就是 点了哪个元素
+        //     const target = event.target;
+        //     // console.log(event);
+        //     console.log(target.innerHTML); 
+        // })
+        // 1:有几个li 产生几个绑定， 只能监听已有的元素
+        // 2：只有一个事件绑定，监听"未来"元素
+        // 节点比较多 （可能 成千上万个li节点） 采取 2 方式   
+    </script>
+</body>
+</html>
