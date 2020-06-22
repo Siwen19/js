@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        #container {
+            width: 700px;
+            line-height: 0;
+        }
+        .cell {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background-color: grey;
+            border-right: 1px solid white;
+            border-bottom: 1px solid white;  
+        }
+    </style>
+</head>
+<body>
+<div id="container"></div>
+<script>
+    const container = document.getElementById('container')
+    let arr = new Array(10000).fill(0);
+    let mouse = false; 
+    arr.forEach((item, index) => {
+        const cell = document.createElement('div');
+        cell.classList.add('cell');
+        container.appendChild(cell); 
+        cell.addEventListener('mousemove', () => {
+            if (mouse) {
+                cell.style.backgroundColor = 'black';
+                arr[index] = 2;
+            }
+        })
+    })  
+    document.addEventListener('mousedown', () => {
+         mouse = true;
+    })
+    document.addEventListener('mouseup', () => {
+        mouse = false;
+    })
+    // 鼠标右键
+    document.addEventListener('contextmenu', (e) => e.preventDefault())
+
+    function findPath(map, start, end) {
+        let queue = [ start ];
+        // 搜索的入口
+        function insert(x, y) {
+            if (map[x * 100 + y] !== 0) return;
+            if (x < 0 || x >= 100 || y < 0 || y >= 100) return;
+            // 已经走过的点
+            map[x * 100 + y] = 3;
+            container.children[x * 100 + y].style.backgroundColor = 'green';
+            queue.push([x, y]); 
+        }
+        while (queue.length) {
+            let [x, y] = queue.shift();
+            // 上下左右四个方向 
+            if (x === end[0] && y === end[1]) {
+                return true;
+            }
+            insert(x + 1, y);
+            insert( x - 1, y);
+            insert(x, y + 1);
+            insert(x, y - 1);
+        }
+        return false;
+    }
+    // findPath(arr, [0, 0], [50, 50])
+</script>
+</body>
+</html>
+
