@@ -1,0 +1,51 @@
+<script>
+    class Home {
+        constructor() {
+                this.state = {}
+            }
+            // Home.prototype
+        handleOpen() {}
+    }
+    let h = new Home()
+        // 
+    function Animal() {
+        // 自身的属性
+        this.name = 'name';
+    }
+    // 一个 对象（{ constructor: }）
+    console.log(Animal.prototype)
+        // 原型链
+        // say 怎么获取到？
+        // 公共的（new 的关系 所有的实例都会继承这里）
+    Animal.prototype.say = function() {
+        console.log('say');
+    }
+
+    let ani = new Animal();
+    console.log(ani);
+
+    // __proto__： chrome 
+    // [[ protype ]]: ECMA 表示
+    console.log(ani.__proto__ === Animal.prototype)
+        // ani.__proto__ = XXXXX
+        // Object.setPrototypeOf()
+    console.log(Object.getPrototypeOf(ani) === ani.__proto__,
+        Object.getPrototypeOf(ani) === Animal.prototype)
+
+    // 构造一个对象出来
+
+    let obj = {}; // 对象字面量   《js语言精粹》
+    let arr = [1, 2]
+    let arr2 = new Array();
+
+    // Object，Array，String, Boolean 内置一个类（构造函数）既然他是构造函数 是不是有 prototype
+
+    // let ani = new Animal();
+    // ani.__proto__ === Animal.prototype
+    let obj2 = new Object();
+
+    console.log(Object.getPrototypeOf(obj) === Object.getPrototypeOf(obj2),
+        Object.getPrototypeOf(obj2) === Object.getPrototypeOf(Animal.prototype),
+        Object.getPrototypeOf(obj) === Object.prototype)
+    console.log(Object.getPrototypeOf(Object.prototype))
+</script>

@@ -1,0 +1,56 @@
+<script>
+    // Object Array String Boolean Function...
+    let obj2 = new Object();
+    let str = '123'
+    let b = true;
+
+    function foo(x, y) {
+        return x + y;
+    }
+    let foo1 = new Function('x', 'y', 'return x + y');
+    console.log(foo1(1, 2))
+
+    // 内置的 类
+    // 讨论 原型的指向的关系 
+    // 
+    console.log(Function.__proto__ === Function.prototype)
+    console.log(Object.__proto__ === Function.prototype)
+
+    console.log(Function.prototype.__proto__ === Object.prototype)
+        // instanceof 谁是谁的实例 谁继承谁
+        // instanceof 原理：
+        // obj instanceof Constuctor
+        //  就是判断 左边这个对象(obj) 它的原型链上面 有没有出现过 Constuctor.prototype 这个对象
+        // 查找左边这个对象的原型链，看原型链有没有出现过 Constuctor.prototype这个对象 ，如果出现了 返回 true
+        // 如果找到原型链的顶端还没找到 返回false
+        // 鸡和蛋
+        // obj.__proto__.__proto__.__proto__.__proto__.....
+
+    // 如果用 instanceof 那么 他俩就成了鸡和蛋的问题
+    console.log(Object instanceof Function) // true
+        // 原因是因为：查找Object的原型链可以找到 Function.prototype
+    console.log(Function instanceof Object) // true
+        // 原因是因为：查找Function的原型链可以找到 Object.prototype 
+
+    console.log(String.__proto__ === Function.prototype)
+    console.log(Boolean.__proto__ === Function.prototype)
+    console.log(Array.__proto__ === Function.prototype)
+    console.log(Number.__proto__ === Function.prototype)
+
+
+    function foo() {}
+
+    foo.call
+    foo.apply
+
+
+    let arr = [0, 1, 2]
+    arr.push
+    arr.shift
+
+    // call apply 来自于哪里 ??
+    // 函数上面的 api 定义 Function.prototype
+    foo.__proto__ === Function.prototype
+        // 数组上面的 api 定义 Array.prototype
+    arr.__proto__ === Array.prototype
+</script>
