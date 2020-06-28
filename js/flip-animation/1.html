@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box {
+            width: 200px;
+            height: 200px;
+            border: 1px solid #000;
+            transform-origin: left top;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box"></div>
+    <script>
+        const box = document.querySelector('#box');
+        const first = box.getBoundingClientRect();
+        box.style.width = '400px';
+        box.style.height = '400px';
+        const last = box.getBoundingClientRect();
+        console.log(first, last);
+
+        // invert 算出前后的偏移量
+        let diffW = first.width / last.width; // 0.5
+        let diffH = first.height / last.height; // 0.5
+        console.log(diffW, diffH);
+
+        // play 从瞬间 到 过渡(先缩小scale(0.5), 后放大scale(1))
+        // web animation api: js 完成动画
+        // css keyframes 关键帧
+        box.animate([{
+            transform: `scale(${diffW})`,
+        }, {
+            transform: `scale(${diffH})`,
+        }], {
+            duration: 3000,
+            easing: 'ease-in-out'
+        })
+    </script>
+</body>
+
+</html>
