@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=750,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./common.css">
+</head>
+
+<body>
+    <div id="app" class="win">
+        <div class="videowin1">
+            <video src="http://tmall.lpiii.cn/618/static/video/big3.mp4" class="video-box video1" style="transform:translateX(0px);"></video>
+            <!-- <div id="playVideoCon">
+                <div class="innerwin wt">
+                    <div class="helptit"></div>
+                </div>
+            </div> -->
+            <div class="innerwin v-enter-to" style="height: 1206px; margin-top: -603px;">
+                <!-- <div  class="innerwin wt" style="height: 1334px; margin-top: -667px;">
+        <div class="vh" style="background: url(&quot;static/videobtn/1.png&quot;);"></div>
+    </div> -->
+                <div class="innerwin wt" style="height: 1206px; margin-top: -603px;">
+                    <div class="change" style="background: url(http://tmall.lpiii.cn/618/static/videobtn/zbtn.png) center center no-repeat;">
+                        <!-- <div  class="change1"
+                            style="background: url(&quot;static/videobtn/zbtninfo.png&quot;) center center no-repeat; display: none;">
+                        </div> -->
+                        <div class="xlz2"></div>
+                        <div class="xlz1"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // 把app 的高度定一下 完成这个项目的适配
+        window.onload = function() {
+            const appEle = document.querySelector('#app');
+            let playNum = 0;
+            init();
+
+            function init() {
+                const winHeight = window.innerHeight;
+                // 4次 页面渲染 DOM 树 CSSOM 树 
+                // 重绘 
+                // appEle.style.background= 'rgb(0,0,0)';
+                // appEle.style.height = winHeight + 'px';
+                // appEle.style.marginTop = (0 - winHeight/2) + 'px';
+                // appEle.style.transform = 'scale(1, 1)';
+                // 一次性写完 
+                appEle.style.cssText = `background:rgb(0,0,0);height:${winHeight}px;
+            margin-top:${-winHeight/2}px;transform:scale(1, 1);`
+            }
+
+            // setInterval(() => {
+            //     playNum++;
+            //     if (playNum > 2) {
+            //         playNum = 0;
+            //     }
+            //     document.querySelector('.video-box').style.transform = 
+            //     `translate(${0-playNum*750}px)`;
+            // },3000);
+        }
+    </script>
+</body>
+
+</html>
