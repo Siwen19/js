@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>         
+    <ul>
+        <li data-uid="1">1
+            <div>
+                123 456
+            </div>
+        </li>
+        <li data-uid="2">2</li>
+        <li data-uid="3">3</li>
+    </ul>
+    <script>
+        let ul = document.querySelector('ul');
+        // event.currentTarget 谁绑定了事件就是谁 在这里是 ul
+        ul.addEventListener('click', (event) => {
+            // 处理的就是 点击div 或者 span 认为都点中了 li
+            const target = event.path.find(x => x.tagName === 'LI' && x.getAttribute('data-uid'));
+            console.log(target);
+            let nickname = event.target.textContent;
+            let uid = event.target.getAttribute('data-uid');
+            // console.log('clicked!!!', event.target, event.currentTarget, nickname, uid);
+        })
+        // 动态地获取 DOM 结点, 实时的
+        const list1 = document.querySelectorAll('li');
+        const list2 = document.getElementsByTagName('li');
+        // ul.removeChild(list1[0]);
+        // ul.innerHTML = `<li></li>`;
+        console.log(list1, list2);
+    </script>
+</body>
+</html>
