@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let p = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve(1);
+            }, 1000);
+        });
+        let p1 = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve(2);
+            }, 2000);
+        });
+        let p2 = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                reject(3);
+            }, 3000);
+        });
+
+        Promise.myAll = function (promiseArr) {
+            return new Promise((resolve, reject) => {
+                let total = 0;
+                let res = [];
+                promiseArr.forEach((pro, i) => {
+                    pro.then((r) => {
+                        res[i] = r;
+                        total++;
+                        if (total === promiseArr.length) {
+                            // 所有的 promise 都成功了
+                            resolve(res);
+                        }
+                    })
+                        .catch(reject);
+                })
+            })
+        }
+        Promise.myAll([p, p1, p2])
+            .then(console.log);
+    </script>
+</body>
+
+</html>
