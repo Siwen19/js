@@ -1,0 +1,29 @@
+var addTwoNumbers = function(l1, l2) {  
+    let cur1 = l1, cur2 = l2; 
+    let add = 0; 
+    let node = new ListNode(0); 
+    let temp = node;
+    while (cur1 !== null || cur2 !== null) {  
+        let sum;
+        if (cur1 === null) { 
+            sum = cur2.val; 
+        } else if (cur2 === null) {
+            sum = cur1.val;
+        } else {
+            sum = cur1.val + cur2.val; 
+        } 
+        
+        if (add !== 0) {
+            sum ++;
+            add = 0;
+        }
+        add = sum >= 10 ? 1:0;   
+        sum = sum >= 10 ? sum - 10 : sum;
+        temp.next = new ListNode(sum);
+        temp = temp.next;
+        if (cur1 !== null) cur1 = cur1.next;  
+        if (cur2 !== null) cur2 = cur2.next; 
+    }
+    if (add !== 0) temp.next = new ListNode(add);
+    return node.next;
+};
