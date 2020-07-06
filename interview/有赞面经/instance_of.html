@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 元编程：对编程语言的再编程
+        class myArr {
+            static [Symbol.hasInstance](obj) {
+                return true;
+            }
+        }
+
+        // [] instanceof Array
+        function myInstance(obj, Constructor) {
+            let proto = obj.__proto__;
+            if (proto === null) return false;
+            if (proto === Constructor.prototype) {
+                return true;
+            }
+            return myInstance(proto, Constructor);
+        }
+        console.log(myInstance([], Array));
+        console.log(myInstance({}, Object));
+        let arr = new myArr();
+        let arr1 = [];
+        console.log(myArr[Symbol.hasInstance]);
+        console.log(arr instanceof myArr);
+        console.log(arr1 instanceof myArr);
+    </script>
+</body>
+</html>
