@@ -1,0 +1,47 @@
+<script>
+    let node = {
+        val: 1
+    }
+    let node2 = {
+        val: 2
+    }
+    let node3 = {
+        val: 3
+    }
+    node.next = node2;
+    node2.next = node3;
+    console.log(node);
+    let current = node;
+    while (current) {
+        console.log(current.val);
+        current = current.next;
+    }
+
+    var oddEvenList = function (head) {
+        let l1 = { val: null, next: null },
+        l2 = { val: null, next: null },
+        cur1 = l1,
+        cur2 = l2,
+        current = head,
+        i = 1;
+        while (current) {
+            if (i % 2 !== 0) {
+                cur1.next = current;
+                cur1 = cur1.next;
+            } else {
+                cur2.next = current;
+                cur2 = cur2.next;
+            }
+            i ++;
+            current = current.next;
+        }
+        if (i % 2 !== 0) {
+            cur1.next = null;
+        } else {
+            cur2.next = null;
+        }
+        console.log(l1, l2);
+        cur1.next = l2.next;
+    };
+    oddEvenList({val: 1, next: {val: 2, next: {val:3, next: {val: 4, next: {val: 5, next: null}}}}})
+</script>
