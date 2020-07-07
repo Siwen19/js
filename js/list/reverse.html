@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="wrap">
+        <p>1</p>
+        <span>2</span>
+        <li>3</li>
+    </div>
+        <script>
+            const childs = document.querySelector('.wrap');
+            const eles = childs.childNodes;
+            // const copy = 
+            // let reverseHTML = '';  
+            for (let i = eles.length - 1; i >=0; i--) { 
+                childs.appendChild(eles[i]);
+                console.log(eles);
+            } 
+        </script> 
+</body>
+</html>
