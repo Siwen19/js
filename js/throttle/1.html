@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            width: 100vw;
+            height: 100vh;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        const body = document.body;
+
+        function getUserInfo() {
+            console.log('发出请求');
+        }
+
+        body.onmousemove = throttle(getUserInfo, 2000);
+
+        function throttle(func, wait) {
+            var previous = 0;
+            var timeout = null;
+            return function() {
+                var now = new Date().getTime();
+                const remain = wait - (now - previous);
+                if (now - previous > wait) {
+                    func();
+                    previous = now;
+                } else if (!timeout) {
+                    timeout = setTimeout(() => {
+                        func();
+                        timeout = null;
+                        // 之后中间事件的触发 时间戳和timeout是互竞的
+                        previous = new Date().getTime();
+                    }, remain);
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
