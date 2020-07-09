@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            width: 100vw;
+            height: 100vh;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        const body = document.body;
+
+        function getUserInfo() {
+            console.log('发出请求');
+        }
+
+        body.onmousemove = throttled(getUserInfo, 2000);
+        // 时间戳 头部事件有了 尾巴没有
+        function throttled(func, wait) {
+            var previous = 0;
+            return function() {
+                var now = new Date().getTime();
+                if (now - previous > 2000) {
+                    func();
+                    previous = now;
+                }
+            }
+        }
+        // 定时器 头部时间没有 尾部有
+        function throttled1(func, wait) {
+            var timeout = null;
+            return function() {
+                if (!timeout) {
+                    timeout = setTimeout(() => {
+                        func();
+                        timeout = null;
+                    }, wait);
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
