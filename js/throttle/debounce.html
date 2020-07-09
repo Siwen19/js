@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            width: 100vw;
+            height: 100vh;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        const body = document.body;
+
+        function getUserInfo() {
+            console.log('发出请求');
+        }
+        body.onmousemove = debounce(getUserInfo, 1000);
+
+        function debounce(func, wait) {
+            let timeout = null;
+            return function() {
+                if (timeout) clearTimeout(timeout);
+                timeout = setTimeout(() => {
+                    func();
+                }, wait);
+            }
+        }
+    </script>
+</body>
+
+</html>
