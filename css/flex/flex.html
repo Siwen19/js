@@ -1,0 +1,86 @@
+<style>
+    .flex {
+        display: flex;
+        height: 100vh;
+        flex-wrap: wrap;
+        align-content: flex-end;
+        align-items: center;
+        justify-content: space-around;
+        /* strench 平分剩余空间 */
+    }
+
+    .item1 {
+        width: 120px;
+        height: 60px;
+        background-color: aqua;
+    }
+
+    .item2 {
+        width: 140px;
+        height: 160px;
+        background-color: red;
+        padding-top: 30px;
+    }
+
+    .item3 {
+        width: 140px;
+        height: 20px;
+        background-color: green;
+        align-self: flex-end;
+        order: -1;
+    }
+
+    .flex1 {
+        display: flex;
+        /* sum 260 */
+        width: 600px;
+        outline: 1px solid blue;
+    }
+
+    .item11 {
+        flex-grow: 1;
+        flex-shrink: 1;
+        flex-basis: 200px;
+        flex: 1 1 200px;
+    }
+
+    .item22 {
+        width: 200px;
+    }
+</style>
+<div class="flex1">
+    <div class="item1 item11">
+        English1
+    </div>
+    <div class="item2 item22">
+        English2
+        <br />
+        English2
+        <br />
+    </div>
+</div>
+
+</style>
+<div class="flex">
+    <div class="item1">
+        English
+    </div>
+    <div class="item1">
+        English
+    </div>
+    <div class="item3">
+        English
+    </div>
+    <div class="item1">
+        English
+    </div>
+    <div class="item1">
+        English
+    </div>
+    <div class="item2">
+        English
+        <br />
+        English
+        <br />
+    </div>
+</div>
