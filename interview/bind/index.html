@@ -1,0 +1,30 @@
+<script>
+    function Animal(name, color) {
+        this.name = name
+        this.color = color
+    }
+
+    Animal.prototype.say = function () {
+        console.log(`My color is ${this.color}`)
+    }
+
+    Function.prototype.myBind = function (THIS, ...arg1) {
+        let fn = this
+
+        function test(...arg2) {
+            let args = arg1.concat(arg2)
+            let isNewCall = new.target === test
+            return fn.apply(isNewCall ? this : THIS, args)
+        }
+        test.prototype = Object.create(this.prototype)
+        return test
+
+    }
+
+    const Cat = Animal.myBind(null, 'lili')
+    const cat = new Cat('yellow')
+    cat.say()
+    if (cat.say() === `My color is yellow` && cat instanceof Cat && cat instanceof Animal) {
+        console.log('success')
+    }
+</script>
